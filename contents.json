@@ -1,0 +1,26 @@
+{
+  "toppers": [
+    {
+      "rank": 1,
+      "name": "Name1",
+      "percentage": 98.5
+    },
+    {
+      "rank": 2,
+      "name": "nothing",
+      "percentage": 97.6
+    },
+    {
+      "rank": 3,
+      "name": "Name 3",
+      "percentage": "95.3"
+    }
+  ],
+  "exams": [
+    "2024-25",
+    "H 2024-25",
+    "H 2025-26",
+    "2025-26",
+    "H 2026-27"
+  ]
+}
