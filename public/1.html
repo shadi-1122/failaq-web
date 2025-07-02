@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="toppersContainer" class="toppers"></div>
+
+<script>
+async function loadToppers() {
+  try {
+    const [toppersRes, usersRes] = await Promise.all([
+      fetch('/contents.json'),
+      fetch('/users.json')
+    ]);
+
+    const { toppers } = await toppersRes.json();
+    const users = await usersRes.json();
+
+    const container = document.getElementById('toppersContainer');
+    container.className = "toppers";
+    container.innerHTML = '';
+
+    toppers.forEach(topper => {
+      const user = users.find(u => u.Name === topper.name);
+      const adno = user ? user.adno : 'default';
+      const photoPath = `/photos/${adno}.jpg`;
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${photoPath}" alt="${topper.name}'s photo" onerror="this.src='/photos/default.jpg'">
+        <input value="${topper.name}" />
+        <input value="${topper.percentage}%" />
+      `;
+      container.appendChild(card);
+    });
+
+  } catch (err) {
+    console.error('Failed to load toppers:', err);
+    document.getElementById('toppersContainer').innerHTML = '<p>Error loading toppers</p>';
+  }
+}
+
+loadToppers();
+</script>
+
+</body>
+</html>

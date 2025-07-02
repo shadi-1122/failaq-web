@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+  <div class="layout">
+    <!-- Fixed Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">Admin</div>
+      <nav>
+        <ul>
+          <li onclick="showTab('dashboard')"><span class="material-symbols-rounded">home</span> Dashboard</li>
+          <li onclick="showTab('users')"><span class="material-symbols-rounded">group</span> Users</li>
+          <li onclick="showTab('reports')"><span class="material-symbols-rounded">bar_chart</span> Reports</li>
+          <li onclick="showTab('settings')"><span class="material-symbols-rounded">settings</span> Settings</li>
+          <li onclick="showTab('gallery')"><span class="material-symbols-rounded">settings</span> Settings</li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <header class="header">
+        <h1 id="pageTitle">Dashboard</h1>
+      </header>
+
+      <section id="dashboard" class="tab active">
+        <p>Welcome to your dashboard.</p>
+        <div id="toppersContainer"></div>
+        
+        <h2>Top 10 Achievers</h2>
+        <div class="table-responsive">
+          <table id="rankingTable" class="ranking-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>ADNO</th>
+                <th>Name</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <h2>Top 10 of This Month</h2>
+        <table id="monthlyTopperTable" class="ranking-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>ADNO</th>
+              <th>Name</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <h2>Student Achievement Trend</h2>
+        <canvas id="achievementChart" width="600" height="300"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <div id="examCards" class="exam-card-grid"></div>
+      </section>
+
+      <section id="users" class="tab">
+        <div class="tab-header">
+          <h2>Users</h2>
+          <div>
+            <button id="addUserBtn">Add User</button>
+            <input type="file" id="csvFileInput" accept=".csv" hidden onchange="handleCSVUpload(this.files[0])" />
+            <button onclick="document.getElementById('csvFileInput').click()">Upload CSV</button>
+          </div>
+        </div>
+        <div class="table-container">
+          <table id="userTable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="reports" class="tab">
+        <p>Reports section is under construction.</p>
+        <section id="changePasswordSection">
+          <h2>Change Password</h2>
+          <form id="changePasswordForm">
+            <label for="current">Current Password</label>
+            <div class="input-group">
+              <input type="password" id="current" required />
+              <span class="material-symbols-rounded toggle-visibility" data-target="current">visibility_off</span>
+            </div>
+
+            <label for="new">New Password</label>
+            <div class="input-group">
+              <input type="password" id="new" required />
+              <span class="material-symbols-rounded toggle-visibility" data-target="new">visibility_off</span>
+            </div>
+
+            <label for="confirm">Confirm New Password</label>
+            <div class="input-group">
+              <input type="password" id="confirm" required />
+              <span class="material-symbols-rounded toggle-visibility" data-target="confirm">visibility_off</span>
+            </div>
+
+            <button type="submit">Update Password</button>
+            <div id="passwordMessage"></div>
+          </form>
+        </section>
+  
+      </section>
+
+      <section id="settings" class="tab">
+        <p>Settings will go here.</p>
+      </section>
+
+      <section id="gallery" class="tab">
+        <div id="galleryGrid"></div>
+        <div class="lightbox" id="lightbox">
+          <span class="material-symbols-rounded close-btn" onclick="closeLightbox()">close</span>
+          <span class="material-symbols-rounded nav-btn prev-btn" onclick="prevImage()">arrow_back</span>
+          <img id="lightboxImage" src="" alt="Gallery image">
+          <span class="material-symbols-rounded nav-btn next-btn" onclick="nextImage()">arrow_forward</span>
+        </div>
+
+      </section>
+
+    </main>
+  </div>    
+
+  <script src="script.js"></script>
+</body>
+</html>
